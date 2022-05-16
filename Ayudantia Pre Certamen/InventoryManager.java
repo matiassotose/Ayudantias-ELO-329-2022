@@ -5,10 +5,7 @@ public class InventoryManager {
     public static void main(String[] args) {
         try {
             FileManager fileManager = new FileManager("data_example_csv.csv");
-            ArrayList<String> rowData = fileManager.getRowData();
-            for (String data : rowData) {
-                System.out.println(data);
-            }
+            ArrayList<Product> rowData = fileManager.getRowData();
             ActionFinderStrategy.performAction(args, rowData);
         } catch (FileNotFoundException e) {
             System.out.println("Ocurrio un error al procesar el archivo.");
