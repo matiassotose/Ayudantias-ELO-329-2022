@@ -24,8 +24,54 @@ void enter(int row, int col, int value, std::vector<std::vector<int>> &board){
 }
 
 bool check(std::vector<std::vector<int>> &board){
-  /* Completar funcion */
-  return true;
+
+  int j1Counter = 0;
+  int j2Counter = 0;
+
+  int i;
+
+  /* Revisar diagonales */
+
+  for(i=0;i<board.size();++i){ // Top Derecha a Izquierda
+      if(board[i][i] == 1){
+        j1Counter++;
+      }
+      else if(board[i][i] == 2){
+        j2Counter++;
+      }
+  }
+  if(j1Counter==5){
+    std::cout<<"Ganador J1\n";
+    return true;
+  }
+  else if(j2Counter==5){
+    std::cout<<"Ganador J2\n";
+    return true;
+  }
+  else{
+    j1Counter = 0;
+    j2Counter = 0;
+  }
+
+  for(i=0;i<board.size();++i){ // Top Izquierda a Derecha
+      if(board[i][(board.size()-1)-i] == 1){
+        j1Counter++;
+      }
+      else if(board[i][(board.size()-1)-i] == 2){
+        j2Counter++;
+      }
+  }
+  if(j1Counter==5){
+    std::cout<<"Ganador J1\n";
+    return true;
+  }
+  else if(j2Counter==5){
+    std::cout<<"Ganador J2\n";
+    return true;
+  }
+
+
+  return false;
 }
 
 
@@ -49,13 +95,13 @@ void start(std::vector<std::vector<int>> &board){
     std::cout<<"Ingrese el numero de columna: ";
     std::cin>>col;
     if(row<5 && col<5){
-      if(true/* Checkear que la posicion este vacia */){
+      if(board[row][col]==0){
         enter(row,col,value,board);
         drawBoard(board);
         if(i>=2){
           win = check(board);
           if(win){
-            break;
+            return;
           }
         }
         i++;
@@ -78,6 +124,6 @@ int main(int argc, char const *argv[]) {
 
   std::vector<std::vector<int>> board(5,std::vector<int>(5,0));
   drawBoard(board);
-  // start(board);
+  start(board);
   return 0;
 }
